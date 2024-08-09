@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="input-container">
+        <input class="input" id="todo" placeholder="What needs to be done" (keydown.enter)="addTodo($event)">
+        <span>{{ error }}</span>
+    </div>
+    <app-list></app-list>
+    <app-footer></app-footer>
+</div>

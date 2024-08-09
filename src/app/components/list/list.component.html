@@ -1,0 +1,38 @@
+<div class="list">
+    <ul class="ul-list">
+        @for (item of visibleTodoList(); track item.id; let idx = $index) {
+            <li>
+                <div class="form-checkbox">
+                    <input class="checkbox" type="checkbox" [checked]="item.isCompleted" 
+                    [id]="item.id"
+                    (change)="toggleTodo(item)">
+                    <label [for]="item.id" [ngClass]="{completed: item.isCompleted}"  *ngIf="!item._isEditing">{{ item.text }}</label> 
+                    <ng-container *ngIf="item._isEditing">
+                        <input
+                          [tabindex]="idx"
+                          type="text"
+                          class="edit"
+                          #textInput
+                          [value]="editingText"
+                          (keyup)="changeText($event)"
+                          (keyup.enter)="changeTodo(item)"
+                          (focusout)="onFocusOutEvent(item.id)"
+                        />
+                      </ng-container>
+                </div>
+                <div class="button-container">
+                    <button class="delete-button" (click)="removeTodo(item.id)">
+                        <span class="icon-cross"></span>
+                    </button>
+                    <button class="edit-button" (click)="editTodo(item.id)" [disabled]="item.isCompleted">
+                        <mat-icon>edit-solid</mat-icon>
+                    </button>
+                </div>
+                
+            </li>
+        } @empty {
+            <p>No items...</p>
+        }
+    </ul>
+</div>
+

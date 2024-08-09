@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="count-container">
+        <span>{{ filterSig() === filterEnum.Completed ? 0 : itemToLeft() }} 
+            {{ itemToLeft() > 1 ? 'items' : 'item' }}  to left</span>
+    </div>
+    <div class="filters-container">
+        <ul>
+            @for (filter of filters; track filter) {
+                <li>
+                    <button 
+                    [ngClass]="{selected: filterSig() === filter}" 
+                    (click)="changefilter(filterEnum[filter])">
+                        {{ filter }}
+                    </button>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
